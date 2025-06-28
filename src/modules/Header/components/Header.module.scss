@@ -1,0 +1,41 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  background-color:#FFFFFF
+}
+.headerLogo {
+  display: flex;
+  align-items: center;
+  margin-left: 32px;
+}
+.headerText {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 15px;
+  background-color: rgb(247, 247, 247);
+  border-radius: 15px;
+  padding-left: 10px;
+}
+.headerText img {
+  margin-left: 8px;
+}
+.cart {
+  margin-right: 20px;
+}
+.cart Button {
+  padding: 10px 40px;
+}
+
+.cart img {
+  margin-left: 10px;
+}
+

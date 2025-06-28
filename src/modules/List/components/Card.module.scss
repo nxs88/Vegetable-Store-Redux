@@ -1,0 +1,37 @@
+.card {
+  width: 302px;
+  height: 414px;
+}
+.cardMain {
+  display: flex;
+  gap: 10px;
+}
+.iconMinus {
+  background-image: url('../../../assets/img/minus-button.svg');
+  width: 30px;
+  height: 30px;
+}
+.iconPlus {
+  background-image: url('../../../assets/img/plus-button.svg');
+  width: 30px;
+  height: 30px;
+}
+.cardFooter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cardButton Button {
+  padding: 10px 40px;
+}
+.cardButton Button:hover {
+  background-color: #d6f0dc;
+}
+.cardButton img {
+  margin-left: 10px;
+  color: rgb(59, 148, 78);
+}
+.cardButton span {
+  color: rgb(59, 148, 78);
+}
