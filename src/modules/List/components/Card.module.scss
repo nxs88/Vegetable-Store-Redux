@@ -1,10 +1,26 @@
 .card {
   width: 302px;
   height: 414px;
+  border-radius: 24px;
+  background-color: #fff;
+  padding: 15px;
 }
 .cardMain {
   display: flex;
+  justify-content: space-between;
+  h4 {
+    font-size: 18px;
+    font-weight: 600;
+  }
+}
+.addBlock {
+  display: flex;
+  align-items: center;
   gap: 10px;
+  span {
+    font-size: 16px;
+    font-weight: 400;
+  }
 }
 .iconMinus {
   background-image: url('../../../assets/img/minus-button.svg');
@@ -19,19 +35,42 @@
 .cardFooter {
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: space-between;
+  margin-top: 30px;
+  h3 {
+    font-size: 20px;
+    font-weight: 600;
+  }
 }
 
-.cardButton Button {
-  padding: 10px 40px;
+.cardButton {
+  Button {
+    padding: 10px 40px;
+    border-radius: 10px;
+  }
+  &:hover {
+    background-color: #d6f0dc;
+    border-radius: 10px;
+  }
+  img {
+    margin-left: 10px;
+    color: rgb(59, 148, 78);
+  }
+  span {
+    color: rgb(59, 148, 78);
+    font-size: 16px;
+    font-weight: 600;
+  }
 }
-.cardButton Button:hover {
-  background-color: #d6f0dc;
-}
-.cardButton img {
-  margin-left: 10px;
-  color: rgb(59, 148, 78);
-}
-.cardButton span {
-  color: rgb(59, 148, 78);
+.cardLoader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 276px;
+  background-color: #f3f5fa;
+  border-radius: 10px;
+  img {
+    width: 30px;
+    height: 30px;
+  }
 }

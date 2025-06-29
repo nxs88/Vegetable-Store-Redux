@@ -6,8 +6,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 10px;
-  background-color:#FFFFFF
+  background-color: #ffffff;
+  padding: 8px 0;
+  
 }
 .headerLogo {
   display: flex;
@@ -28,14 +29,13 @@
 .headerText img {
   margin-left: 8px;
 }
+
 .cart {
   margin-right: 20px;
+  Button {
+    padding: 10px 40px;
+  }
+  img {
+    margin-left: 10px;
+  }
 }
-.cart Button {
-  padding: 10px 40px;
-}
-
-.cart img {
-  margin-left: 10px;
-}
-
