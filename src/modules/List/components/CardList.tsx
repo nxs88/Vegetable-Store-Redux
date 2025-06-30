@@ -1,12 +1,8 @@
 import Card from './Card';
 import styles from './CardList.module.scss';
+import type {Product} from '../../../types/Product'
 
-export type Product = {
-  id: number;
-  name: string;
-  price: number;
-  image: string;
-};
+
 
 type CardListProps = {
   loading: boolean;

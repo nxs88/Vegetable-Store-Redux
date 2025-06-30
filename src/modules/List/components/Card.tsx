@@ -1,13 +1,11 @@
 import { Card as MantineCard, Image } from '@mantine/core';
 import Button from '../../../shared/components/Button';
 import styles from './Card.module.scss';
+import { CartContext } from '../../Header/context/CartContex';
+import { useContext } from 'react';
+import type { Product } from './CardList';
 
-type Product = {
-  id: number;
-  name: string;
-  price: number;
-  image: string;
-};
+
 
 type CardProps = {
   product: Product;
@@ -15,7 +13,16 @@ type CardProps = {
 };
 
 export default function Card({ product, loading }: CardProps) {
-  
+  const { setOrders, data } = useContext(CartContext);
+
+  const addToCartHandler = (id: number) => {
+    if (!data) return;
+    const addCard = data.find((card) => card.id === id);
+    if (addCard) {
+      setOrders((prev) => [...prev, addCard]);
+    }
+  };
+
   return (
     <div className={styles.card}>
       {loading ? (
@@ -40,6 +47,7 @@ export default function Card({ product, loading }: CardProps) {
             <h3>$ {product.price}</h3>
             <div className={styles.cardButton}>
               <Button
+                onClick={() => addToCartHandler(product.id)}
                 className={styles.cardButton}
                 color="rgb(231, 250, 235)"
                 size="lg"
