@@ -1,11 +1,9 @@
 import { Card as MantineCard, Image } from '@mantine/core';
 import Button from '../../../shared/components/Button';
 import styles from './Card.module.scss';
-import { CartContext } from '../../Header/context/CartContex';
-import { useContext } from 'react';
-import type { Product } from './CardList';
-
-
+import { MyContext } from '../../../context/MyContext';
+import { useContext, useState } from 'react';
+import type { Product } from '../../../types/Product';
 
 type CardProps = {
   product: Product;
@@ -13,14 +11,21 @@ type CardProps = {
 };
 
 export default function Card({ product, loading }: CardProps) {
-  const { setOrders, data } = useContext(CartContext);
+  const { setOrders } = useContext(MyContext);
+  const [counter, setCounter] = useState(1);
 
-  const addToCartHandler = (id: number) => {
-    if (!data) return;
-    const addCard = data.find((card) => card.id === id);
-    if (addCard) {
-      setOrders((prev) => [...prev, addCard]);
-    }
+  const increaseCountHandler = () => {
+    setCounter((prev) => prev + 1);
+  };
+
+  const decreaseCountHandler = () => {
+    if (counter === 1) return;
+    setCounter((prev) => prev - 1);
+  };
+
+  const addToCartHandler = () => {
+    setOrders((prev) => [...prev, { product, quantity: counter }]);
+    setCounter(1);
   };
 
   return (
@@ -37,17 +42,23 @@ export default function Card({ product, loading }: CardProps) {
           <div className={styles.cardMain}>
             <h4>{product.name}</h4>
             <div className={styles.addBlock}>
-              <span className={styles.iconMinus}></span>
-              <span>1</span>
-              <span className={styles.iconPlus}></span>
+              <button
+                className={styles.iconMinus}
+                onClick={decreaseCountHandler}
+              ></button>
+              <span>{counter}</span>
+              <button
+                className={styles.iconPlus}
+                onClick={increaseCountHandler}
+              ></button>
             </div>
           </div>
 
           <div className={styles.cardFooter}>
-            <h3>$ {product.price}</h3>
+            <h3>$ {product.price * counter}</h3>
             <div className={styles.cardButton}>
               <Button
-                onClick={() => addToCartHandler(product.id)}
+                onClick={addToCartHandler}
                 className={styles.cardButton}
                 color="rgb(231, 250, 235)"
                 size="lg"

@@ -8,7 +8,6 @@
   align-items: center;
   background-color: #ffffff;
   padding: 8px 0;
-  
 }
 .headerLogo {
   display: flex;
@@ -37,5 +36,11 @@
   }
   img {
     margin-left: 10px;
+  }
+}
+
+.badge {
+  span {
+    color: black;
   }
 }

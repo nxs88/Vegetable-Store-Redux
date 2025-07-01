@@ -1,5 +1,7 @@
 .cartContainer {
-  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  width: 440px;
   box-shadow: 0 2px 8px 0 rgba(33, 37, 41, 0.08);
   border-radius: 24px;
   padding: 15px;
@@ -37,22 +39,31 @@
 }
 .addBlock {
   display: flex;
-  align-self: flex-end;
+  align-items: center;
   gap: 10px;
-  span {
-    font-size: 16px;
-    font-weight: 400;
+  button {
+    border: none;
+    border-radius: 10px;
+    &:active {
+      transform: scale(0.9);
+    }
   }
 }
 .iconMinus {
-  background-image: url('/src/assets/img/minus-button.svg');
+  background-image: url('../../../assets/img/minus-button-normal.svg');
   width: 30px;
   height: 30px;
+  &:hover {
+    background-image: url('../../../assets/img/minus-button.svg');
+  }
 }
 .iconPlus {
-  background-image: url('/src/assets/img/plus-button.svg');
+  background-image: url('../../../assets/img/plus-button-normal.svg');
   width: 30px;
   height: 30px;
+  &:hover {
+    background-image: url('../../../assets/img/plus-button.svg');
+  }
 }
 .total {
   display: flex;
@@ -67,7 +78,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 300px;
+  align-self: center;
   padding: 24px;
   img {
     width: 118px;

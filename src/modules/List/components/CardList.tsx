@@ -10,6 +10,9 @@ type CardListProps = {
 };
 
 export default function CardList({ data, loading }: CardListProps) {
+
+  
+
   if (!data) {
     return;
   }

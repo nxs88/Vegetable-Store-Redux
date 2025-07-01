@@ -1,24 +1,29 @@
 import styles from './Cart.module.scss';
-import { CartContext } from '../context/CartContex';
+import { MyContext } from '../../../context/MyContext';
 import { useContext } from 'react';
 
 export default function Cart() {
-  const { orders } = useContext(CartContext);
+  const { orders } = useContext(MyContext);
+
+  const totalPrice = orders.reduce(
+    (total, item) => total + item.product.price * item.quantity,
+    0
+  );
 
   return (
     <div className={styles.cartContainer}>
       {orders.length > 0 ? (
         orders.map((order) => (
-          <div key={order.id} className={styles.cartItem}>
-            <img src={order.image} alt={order.name} />
+          <div key={order.product.id} className={styles.cartItem}>
+            <img src={order.product.image} alt={order.product.name} />
             <div className={styles.cartItemDetails}>
-              <h4>{order.name}</h4>
-              <h3>$ {order.price}</h3>
+              <h4>{order.product.name}</h4>
+              <h3>$ {order.product.price}</h3>
             </div>
             <div className={styles.addBlock}>
-              <span className={styles.iconMinus}></span>
-              <span>1</span>
-              <span className={styles.iconPlus}></span>
+              <button className={styles.iconMinus}></button>
+              <span>{order.quantity}</span>
+              <button className={styles.iconPlus}></button>
             </div>
           </div>
         ))
@@ -33,7 +38,7 @@ export default function Cart() {
         {orders.length !== 0 && (
           <>
             <span>Total</span>
-            <span>Total price</span>{' '}
+            <span>$ {totalPrice}</span>{' '}
           </>
         )}
       </div>

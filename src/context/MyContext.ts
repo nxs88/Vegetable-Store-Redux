@@ -1,15 +1,15 @@
 import { createContext } from 'react';
-import type { Product } from '../../../types/Product';
+import type { Product, CartProduct } from '../types/Product';
 
-type CartContextType = {
+type MyContextType = {
   cartOpen: boolean;
   setCartOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  orders: Product[];
-  setOrders: React.Dispatch<React.SetStateAction<Product[]>>;
+  orders: CartProduct[];
+  setOrders: React.Dispatch<React.SetStateAction<CartProduct[]>>;
   data: Product[] | null;
 };
 
-export const CartContext = createContext<CartContextType>({
+export const MyContext = createContext<MyContextType>({
   cartOpen: false,
   setCartOpen: () => {},
   orders: [],

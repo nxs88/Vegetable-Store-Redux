@@ -1,17 +1,16 @@
+import { Badge } from '@mantine/core';
 import Button from '../../../shared/components/Button.tsx';
 import Cart from './Cart.tsx';
 import styles from './Header.module.scss';
-import { CartContext } from '../context/CartContex.ts';
+import { MyContext } from '../../../context/MyContext.ts';
 import { useContext } from 'react';
 
 export default function Header() {
-
-  
   const cartOpenHandler = () => {
     setCartOpen(!cartOpen);
   };
 
-  const { cartOpen, setCartOpen } = useContext(CartContext);
+  const { cartOpen, setCartOpen, orders } = useContext(MyContext);
   return (
     <header>
       <div className={styles.header}>
@@ -31,6 +30,15 @@ export default function Header() {
             size="lg"
             onClick={cartOpenHandler}
           >
+            <Badge
+              className={styles.badge}
+              color="white"
+              mr={10}
+              circle
+              size="md"
+            >
+              <span>{orders.length}</span>
+            </Badge>
             <span>Cart</span>
             <img src="./src/assets/img/cart.svg" alt="Cart" />
           </Button>
