@@ -13,7 +13,6 @@ type CardProps = {
 export default function Card({ product, loading }: CardProps) {
   const { setOrders } = useContext(MyContext);
   const [counter, setCounter] = useState(1);
-
   const increaseCountHandler = () => {
     setCounter((prev) => prev + 1);
   };
@@ -24,7 +23,20 @@ export default function Card({ product, loading }: CardProps) {
   };
 
   const addToCartHandler = () => {
-    setOrders((prev) => [...prev, { product, quantity: counter }]);
+    setOrders((prev) => {
+      const existingProduct = prev.find(
+        (item) => item.product.id === product.id
+      );
+      if (existingProduct) {
+        return prev.map((item) =>
+          item.product.id === product.id
+            ? { ...item, quantity: item.quantity + counter }
+            : item
+        );
+      } else {
+        return [...prev, { product, quantity: counter }];
+      }
+    });
     setCounter(1);
   };
 
