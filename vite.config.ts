@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react';
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/Kata-Vegetable-Store/',
+  base: './',
   plugins: [react()],
   test: {
     setupFiles: ['./setupTests.ts'],
