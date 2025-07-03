@@ -18,7 +18,7 @@ export default function Header() {
           <span className={styles.headerText}>
             Vegetable{' '}
             <a href="">
-              <img src="./src/assets/img/logo.svg" alt="Logo" />
+              <img src="/assets/img/logo.svg" alt="Logo" />
             </a>
           </span>
         </div>
@@ -40,7 +40,7 @@ export default function Header() {
               <span>{orders.length}</span>
             </Badge>
             <span>Cart</span>
-            <img src="./src/assets/img/cart.svg" alt="Cart" />
+            <img src="/assets/img/cart.svg" alt="Cart" />
           </Button>
         </div>
       </div>
