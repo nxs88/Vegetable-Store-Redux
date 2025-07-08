@@ -2,9 +2,9 @@
   margin: 0;
   padding: 0;
 }
-header{
+header {
   position: fixed;
-  width: 1440px;
+  width: 100%;
   z-index: 100;
 }
 .header {
@@ -38,7 +38,6 @@ header{
   margin-right: 20px;
   Button {
     padding: 10px 40px;
-    
   }
   img {
     margin-left: 10px;
