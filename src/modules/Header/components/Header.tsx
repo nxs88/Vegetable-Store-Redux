@@ -45,7 +45,7 @@ export default function Header() {
               <span>{orders.length}</span>
             </Badge>
             <span>Cart</span>
-            <img src="/assets/img/cart.svg" alt="Cart" />
+            <img src="./assets/img/cart.svg" alt="Cart" />
           </Button>
         </div>
       </div>
