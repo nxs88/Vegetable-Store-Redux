@@ -2,16 +2,29 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { describe, it, expect } from 'vitest';
 import Cart from './Cart';
-import { MyContext } from '../../../context/MyContext';
+// import { MyContext } from '../../../context/MyContext';
+import { Provider } from 'react-redux';
+import store from '../../../Redux/store';
+import { configureStore } from '@reduxjs/toolkit';
+import cartReducer from '../../../Redux/cartSlice';
 
 describe('component Card', () => {
   it('Отображает картинку когда корзина пуста', () => {
-    render(<Cart />);
+    render(
+      <Provider store={store}>
+        <Cart />;
+      </Provider>
+    );
+
     const emptyImage = screen.getByAltText('Empty');
     expect(emptyImage).toBeInTheDocument();
   });
   it('Отображает текст когда корзина пуста', () => {
-    render(<Cart />);
+    render(
+      <Provider store={store}>
+        <Cart />;
+      </Provider>
+    );
     const emptyMessage = screen.getByText(/Your cart is empty/i);
     expect(emptyMessage).toBeInTheDocument();
   });
@@ -28,19 +41,22 @@ describe('component Card', () => {
         quantity: 2,
       },
     ];
-
-    const mockContextValue = {
-      orders: mockOrders,
-      cartOpen: true,
-      setCartOpen: () => {},
-      setOrders: () => {},
-      data: [],
-    };
+    const mockStore = configureStore({
+      reducer: {
+        cart: cartReducer,
+      },
+      preloadedState: {
+        cart: {
+          orders: mockOrders,
+          cartOpen: true,
+        },
+      },
+    });
 
     render(
-      <MyContext.Provider value={mockContextValue}>
+      <Provider store={mockStore}>
         <Cart />
-      </MyContext.Provider>
+      </Provider>
     );
 
     const emptyMessage = screen.queryByText(/Your cart is empty/i);

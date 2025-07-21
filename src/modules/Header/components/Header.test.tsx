@@ -3,12 +3,16 @@ import '@testing-library/jest-dom';
 import { describe, it, expect } from 'vitest';
 import Header from './Header';
 import { MantineProvider } from '@mantine/core';
+import { Provider } from 'react-redux';
+import store from '../../../Redux/store';
 
 describe('Header component', () => {
   it('Отображает логотип', () => {
     render(
       <MantineProvider>
-        <Header />;
+        <Provider store={store}>
+          <Header />;
+        </Provider>
       </MantineProvider>
     );
     const logo = screen.getByAltText(/logo/i);
@@ -17,7 +21,9 @@ describe('Header component', () => {
   it('Отображает текст ', () => {
     render(
       <MantineProvider>
-        <Header />;
+        <Provider store={store}>
+          <Header />;
+        </Provider>
       </MantineProvider>
     );
     const text = screen.getByText(/vegetable/i);
@@ -26,7 +32,9 @@ describe('Header component', () => {
   it('Отображает кнопку', () => {
     render(
       <MantineProvider>
-        <Header />;
+        <Provider store={store}>
+          <Header />;
+        </Provider>
       </MantineProvider>
     );
     const button = screen.getByRole('button');
@@ -35,7 +43,9 @@ describe('Header component', () => {
   it('Отображает текст внутри кнопки', () => {
     render(
       <MantineProvider>
-        <Header />;
+        <Provider store={store}>
+          <Header />;
+        </Provider>
       </MantineProvider>
     );
     const button = screen.getByRole('button');
@@ -44,7 +54,9 @@ describe('Header component', () => {
   it('Отображает изначальное количество заказов', () => {
     render(
       <MantineProvider>
-        <Header />;
+        <Provider store={store}>
+          <Header />;
+        </Provider>
       </MantineProvider>
     );
     const number = screen.getByText(0);

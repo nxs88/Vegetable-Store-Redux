@@ -3,13 +3,20 @@ import '@testing-library/jest-dom';
 import { describe, it, expect } from 'vitest';
 import CardList from './CardList';
 import { MantineProvider } from '@mantine/core';
+import { Provider } from 'react-redux';
+import store from '../../../Redux/store';
+import { configureStore } from '@reduxjs/toolkit';
+import cartReducer from '../../../Redux/cartSlice';
+import productsReducer from '../../../Redux/productsSlice';
 
 describe('CardList component', () => {
   it('Отображает текст Catalog', () => {
     const mockData = [{ id: 1, name: 'Product 1', price: 120, image: '' }];
     render(
       <MantineProvider>
-        <CardList data={mockData} loading={false} />
+        <Provider store={store}>
+          <CardList data={mockData} />
+        </Provider>
       </MantineProvider>
     );
 
@@ -19,7 +26,9 @@ describe('CardList component', () => {
   it('Ничего не рендерит если  нет данных', () => {
     render(
       <MantineProvider>
-        <CardList data={null} loading={false} />
+        <Provider store={store}>
+          <CardList data={null} />
+        </Provider>
       </MantineProvider>
     );
     const container = screen.queryByRole('list');
@@ -32,7 +41,9 @@ describe('CardList component', () => {
     ];
     render(
       <MantineProvider>
-        <CardList data={mockData} loading={false} />
+        <Provider store={store}>
+          <CardList data={mockData} />
+        </Provider>
       </MantineProvider>
     );
 
@@ -45,10 +56,24 @@ describe('CardList component', () => {
     const mockData = [
       { id: 1, name: 'Brocolli - 1 Kg', price: 120, image: '' },
     ];
+    const mockStore = configureStore({
+      reducer: {
+        products: productsReducer,
+        cart: cartReducer,
+      },
+      preloadedState: {
+        products: {
+          isLoading: true,
+          products: [],
+        },
+      },
+    });
     render(
-      <MantineProvider>
-        <CardList data={mockData} loading={true} />
-      </MantineProvider>
+      <Provider store={mockStore}>
+        <MantineProvider>
+          <CardList data={mockData} />
+        </MantineProvider>
+      </Provider>
     );
 
     const loadingCard = screen.getByAltText(/Loader/i);

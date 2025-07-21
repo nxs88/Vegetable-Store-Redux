@@ -4,6 +4,11 @@ import { userEvent } from '@testing-library/user-event';
 import { describe, it, expect } from 'vitest';
 import Card from './Card';
 import { MantineProvider } from '@mantine/core';
+import { Provider } from 'react-redux';
+import store from '../../../Redux/store';
+import cartReducer from '../../../Redux/cartSlice';
+import productsReducer from '../../../Redux/productsSlice';
+import { configureStore } from '@reduxjs/toolkit';
 
 describe('Card component', () => {
   it('Отображает скелетон при загрузке', () => {
@@ -13,9 +18,24 @@ describe('Card component', () => {
       price: 10,
       image: '',
     };
+    const mockStore = configureStore({
+      reducer: {
+        products: productsReducer,
+        cart: cartReducer,
+      },
+      preloadedState: {
+        products: {
+          isLoading: true,
+          products: [],
+        },
+      },
+    });
+
     render(
       <MantineProvider>
-        <Card product={mockProduct} loading={true} />
+        <Provider store={mockStore}>
+          <Card product={mockProduct} />
+        </Provider>
       </MantineProvider>
     );
 
@@ -31,7 +51,9 @@ describe('Card component', () => {
     };
     render(
       <MantineProvider>
-        <Card product={mockProduct} loading={false} />
+        <Provider store={store}>
+          <Card product={mockProduct} />
+        </Provider>
       </MantineProvider>
     );
     const productName = screen.getByText(/Brocolli/i);
@@ -51,7 +73,9 @@ describe('Card component', () => {
     };
     render(
       <MantineProvider>
-        <Card product={mockProduct} loading={false} />
+        <Provider store={store}>
+          <Card product={mockProduct} />
+        </Provider>
       </MantineProvider>
     );
     const buttons = screen.getAllByRole('button');
@@ -73,11 +97,12 @@ describe('Card component', () => {
     };
     render(
       <MantineProvider>
-        <Card product={mockProduct} loading={false} />
+        <Provider store={store}>
+          <Card product={mockProduct} />
+        </Provider>
       </MantineProvider>
     );
     const button = screen.getByText(/Add to cart/i);
     expect(button).toBeInTheDocument();
   });
-  
 });
