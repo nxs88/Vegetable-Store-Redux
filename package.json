@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "deploy": "npm run build && git add dist && git commit -m \"build: update dist\" --no-verify || echo \"skip commit\" && git subtree push --prefix dist origin gh-pages --force",
+    "deploy": "npm run build && git subtree split --prefix dist -b temp-pages && git push origin temp-pages:gh-pages --force && git branch -D temp-pages",
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest"
