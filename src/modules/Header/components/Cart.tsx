@@ -29,7 +29,10 @@ export default function Cart() {
         ))
       ) : (
         <div className={styles.cartEmpty}>
-          <img src="./assets/img/cart_empty.svg" alt="Empty" />
+          <img
+            src={`${import.meta.env.BASE_URL}assets/img/cart_empty.svg`}
+            alt="Empty"
+          />
           <p>Your cart is empty</p>
         </div>
       )}

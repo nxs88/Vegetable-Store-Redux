@@ -31,7 +31,10 @@ export default function Card({ product }: CardProps) {
       {loading ? (
         <div className={styles.cardLoader}>
           {' '}
-          <img src="./assets/img/loader.svg" alt="Loader" />
+          <img
+            src={`${import.meta.env.BASE_URL}assets/img/loader.svg`}
+            alt="Loader"
+          />
         </div>
       ) : (
         <MantineCard p={0}>
@@ -65,7 +68,10 @@ export default function Card({ product }: CardProps) {
                 size="lg"
               >
                 <span>Add to cart</span>
-                <img src="./assets/img/cart2.svg" alt="Cart" />
+                <img
+                  src={`${import.meta.env.BASE_URL}assets/img/cart2.svg`}
+                  alt="Cart"
+                />
               </Button>
             </div>
           </div>
