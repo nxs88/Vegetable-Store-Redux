@@ -2,15 +2,20 @@ import { Badge } from '@mantine/core';
 import Button from '../../../shared/components/Button.tsx';
 import Cart from './Cart.tsx';
 import styles from './Header.module.scss';
-import { MyContext } from '../../../context/MyContext.ts';
-import { useContext } from 'react';
+
+import {
+  selectOrders,
+  selectToggleCart,
+  setToggleCart,
+} from '../../../Redux/cartSlice.ts';
+import { useDispatch, useSelector } from 'react-redux';
+import type { AppDispatch } from '../../../Redux/store.ts';
 
 export default function Header() {
-  const cartOpenHandler = () => {
-    setCartOpen(!cartOpen);
-  };
+  const dispatch = useDispatch<AppDispatch>();
+  const cartOpen = useSelector(selectToggleCart);
+  const orders = useSelector(selectOrders);
 
-  const { cartOpen, setCartOpen, orders } = useContext(MyContext);
   return (
     <header>
       <div className={styles.header}>
@@ -28,7 +33,7 @@ export default function Header() {
             color="green"
             radius="md"
             size="lg"
-            onClick={cartOpenHandler}
+            onClick={() => dispatch(setToggleCart())}
           >
             <Badge
               className={styles.badge}

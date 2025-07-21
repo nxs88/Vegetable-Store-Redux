@@ -1,18 +1,22 @@
 import { Card as MantineCard, Image } from '@mantine/core';
 import Button from '../../../shared/components/Button';
 import styles from './Card.module.scss';
-import { MyContext } from '../../../context/MyContext';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import type { Product } from '../../../types/Product';
+import { useDispatch, useSelector } from 'react-redux';
+import { setAddToCart } from '../../../Redux/cartSlice';
+import { selectLoading } from '../../../Redux/productsSlice';
 
 type CardProps = {
   product: Product;
-  loading: boolean;
 };
 
-export default function Card({ product, loading }: CardProps) {
-  const { setOrders } = useContext(MyContext);
+export default function Card({ product }: CardProps) {
   const [counter, setCounter] = useState(1);
+  const dispatch = useDispatch();
+  const loading = useSelector(selectLoading);
+  // const loading = true;
+
   const increaseCountHandler = () => {
     setCounter((prev) => prev + 1);
   };
@@ -20,24 +24,6 @@ export default function Card({ product, loading }: CardProps) {
   const decreaseCountHandler = () => {
     if (counter === 1) return;
     setCounter((prev) => prev - 1);
-  };
-
-  const addToCartHandler = () => {
-    setOrders((prev) => {
-      const existingProduct = prev.find(
-        (item) => item.product.id === product.id
-      );
-      if (existingProduct) {
-        return prev.map((item) =>
-          item.product.id === product.id
-            ? { ...item, quantity: item.quantity + counter }
-            : item
-        );
-      } else {
-        return [...prev, { product, quantity: counter }];
-      }
-    });
-    setCounter(1);
   };
 
   return (
@@ -70,7 +56,10 @@ export default function Card({ product, loading }: CardProps) {
             <h3>$ {product.price * counter}</h3>
             <div className={styles.cardButton}>
               <Button
-                onClick={addToCartHandler}
+                onClick={() => {
+                  dispatch(setAddToCart({ product, quantity: counter }));
+                  setCounter(1);
+                }}
                 className={styles.cardButton}
                 color="rgb(231, 250, 235)"
                 size="lg"

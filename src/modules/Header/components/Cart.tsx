@@ -1,9 +1,9 @@
+import { useSelector } from 'react-redux';
 import styles from './Cart.module.scss';
-import { MyContext } from '../../../context/MyContext';
-import { useContext } from 'react';
+import { selectOrders } from '../../../Redux/cartSlice';
 
 export default function Cart() {
-  const { orders } = useContext(MyContext);
+  const orders = useSelector(selectOrders);
 
   const totalPrice = orders.reduce(
     (total, item) => total + item.product.price * item.quantity,

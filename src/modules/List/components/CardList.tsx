@@ -1,18 +1,12 @@
 import Card from './Card';
 import styles from './CardList.module.scss';
-import type {Product} from '../../../types/Product'
-
-
+import type { Product } from '../../../types/Product';
 
 type CardListProps = {
-  loading: boolean;
   data: Product[] | null;
 };
 
-export default function CardList({ data, loading }: CardListProps) {
-
-  
-
+export default function CardList({ data }: CardListProps) {
   if (!data) {
     return;
   }
@@ -21,7 +15,7 @@ export default function CardList({ data, loading }: CardListProps) {
       <h2>Catalog</h2>
       <div className={styles.container}>
         {data.map((product) => (
-          <Card key={product.id} product={product} loading={loading} />
+          <Card key={product.id} product={product} />
         ))}
       </div>
     </div>
